@@ -1,0 +1,374 @@
+
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#e5233d">
+<meta name="description" content="WALLORA ULTRA — Free wallpapers for phones and computers.">
+<title>WALLORA ULTRA</title>
+<style>
+:root{--red:#e5233d;--dark:#19191f;--bg:#f6f6f8;--card:#fff;--muted:#777783;--line:#e8e8ed}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--dark);font-family:Arial,Helvetica,sans-serif}
+button,input,select{font:inherit}
+button{cursor:pointer}
+button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid #e5233d55;outline-offset:2px}
+a{text-decoration:none;color:inherit}
+header{position:sticky;top:0;z-index:20;background:#ffffffed;backdrop-filter:blur(15px);border-bottom:1px solid var(--line);padding:13px 5%;display:flex;align-items:center;justify-content:space-between;gap:15px}
+.logo{font-size:25px;font-weight:900;letter-spacing:-1px}
+.logo span{color:var(--red)}
+.logo small{display:block;font-size:9px;letter-spacing:4px;color:var(--muted);margin-top:4px}
+nav{display:flex;align-items:center;gap:14px}
+nav a{font-size:12px;color:#555}
+button,.button{border:0}
+.lang,.secondary{background:#fff;border:1px solid var(--line);border-radius:11px;padding:11px 13px}
+.hero{width:90%;max-width:1250px;margin:26px auto 0;padding:42px;border-radius:27px;overflow:hidden;position:relative;color:white;background:linear-gradient(120deg,#18181e,#34242c 62%,#e5233d)}
+.hero:after{content:"W";position:absolute;right:5%;top:-100px;font-size:380px;font-weight:900;color:#ffffff0a;pointer-events:none}
+.hero-content{position:relative;z-index:1;max-width:640px}
+.eyebrow{font-size:11px;letter-spacing:4px;color:#ffadb6;font-weight:bold}
+.hero h1{font-size:clamp(38px,6vw,68px);line-height:1.04;margin:15px 0}
+.hero h1 span{color:#ff7385}
+.hero p{color:#e7e0e3;line-height:1.8;max-width:520px}
+.primary{display:inline-flex;align-items:center;justify-content:center;background:var(--red);color:white;padding:13px 18px;border-radius:11px;font-weight:bold}
+.primary:hover{background:#bc142b}
+main{width:90%;max-width:1250px;margin:32px auto 60px}
+.heading{display:flex;align-items:end;justify-content:space-between;gap:12px;margin-bottom:17px}
+.heading h2{font-size:25px;margin:0 0 7px}
+.heading p{font-size:12px;color:var(--muted);margin:0}
+.tools{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:17px}
+.search{display:flex;align-items:center;gap:10px;background:white;border:1px solid var(--line);border-radius:12px;padding:0 14px;flex:1;min-width:210px}
+.search input{width:100%;min-width:0;border:0;outline:none;padding:14px 0;background:transparent;color:var(--dark)}
+.search input:focus-visible{outline:none}
+select{background:white;border:1px solid var(--line);border-radius:12px;padding:12px;color:var(--dark)}
+.categories{display:flex;gap:8px;overflow-x:auto;padding:3px 1px 14px;scrollbar-width:thin}
+.category{flex-shrink:0;background:white;border:1px solid var(--line);border-radius:50px;padding:10px 15px;font-size:12px;font-weight:bold;color:#555}
+.category.active,.category:hover{background:var(--red);border-color:var(--red);color:white}
+.status{display:flex;justify-content:space-between;gap:10px;color:var(--muted);font-size:12px;margin:10px 0 17px}
+.gallery{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
+.card{min-width:0;background:var(--card);border:1px solid var(--line);border-radius:16px;overflow:hidden;box-shadow:0 7px 26px #17171b09;transition:transform .2s}
+.card:hover{transform:translateY(-4px)}
+.picture{position:relative;background:#e8e8ed;overflow:hidden}
+.picture img{width:100%;aspect-ratio:3/4;object-fit:cover;display:block}
+.picture img.failed{object-fit:contain;padding:25px}
+.tag{position:absolute;top:10px;left:10px;background:#19191dd9;color:white;padding:6px 9px;border-radius:8px;font-size:10px}
+.heart{position:absolute;top:9px;right:9px;width:36px;height:36px;border-radius:50%;background:#fffffff0;color:#444;font-size:21px}
+.heart.saved{color:var(--red)}
+.info{padding:12px}
+.name{font-size:13px;font-weight:bold;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-bottom:6px}
+.meta{font-size:11px;color:var(--muted);margin-bottom:12px}
+.actions{display:flex;gap:7px}
+.actions button{flex:1;border:1px solid var(--line);border-radius:9px;padding:10px 5px;font-size:11px;font-weight:bold;background:white}
+.actions .download{background:var(--red);color:white;border-color:var(--red)}
+.more{text-align:center;margin:27px 0}
+.more button{min-width:200px}
+.empty{grid-column:1/-1;text-align:center;background:white;padding:40px 20px;border:1px solid var(--line);border-radius:16px}
+.empty p{font-size:13px;color:var(--muted)}
+.upload{margin-top:45px;background:#fff9fa;border:1px dashed #e8a1aa;border-radius:18px;padding:25px}
+.upload h2{margin:0 0 8px}
+.upload p{font-size:13px;color:var(--muted);line-height:1.8}
+.upload-row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+#files{display:none}
+footer{background:#19191f;color:white;text-align:center;padding:34px 15px}
+footer p{color:#c8c8ce;font-size:12px;line-height:1.8}
+footer strong{color:#ff7385}
+.toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);z-index:50;background:#202025;color:white;border-radius:12px;padding:13px 18px;font-size:13px;max-width:90%;text-align:center;box-shadow:0 10px 30px #0002}
+.hidden{display:none!important}
+[dir=rtl] .tag{left:auto;right:10px}
+@media(max-width:1000px){.gallery{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media(max-width:650px){
+ header{padding:12px 4%}.logo{font-size:21px}nav{gap:7px}nav a{font-size:11px}
+ .hero{width:92%;padding:25px;min-height:255px}.hero:after{font-size:240px;right:-10px;top:10px}
+ main{width:92%;margin-top:25px}.gallery{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+ .info{padding:9px}.name{font-size:12px}.actions button{font-size:10px}
+ .heading h2{font-size:21px}.upload{padding:18px}
+}
+@media(max-width:360px){.gallery{grid-template-columns:1fr}.picture img{aspect-ratio:4/3}}
+</style>
+</head>
+<body>
+<header>
+  <a class="logo" href="#">WALL<span>ORA</span><small>ULTRA WALLPAPERS</small></a>
+  <nav>
+    <a href="#explore" data-i="navExplore">Explore</a>
+    <a href="#uploads" data-i="navUploads">My Uploads</a>
+    <button class="lang" id="langBtn">🇲🇦 العربية</button>
+    <button class="lang" id="favNav" aria-label="Favorites">♥ <span id="favCount">0</span></button>
+  </nav>
+</header>
+
+<section class="hero">
+  <div class="hero-content">
+    <div class="eyebrow" data-i="eyebrow">YOUR SCREEN. YOUR STYLE.</div>
+    <h1><span data-i="heroFirst">Find Your</span><br><span data-i="heroSecond">Next Wallpaper.</span></h1>
+    <p data-i="heroDesc">Discover wallpapers for every screen. Choose your style and download your favorites.</p>
+    <a href="#explore" class="primary" data-i="exploreBtn">Explore wallpapers ↗</a>
+  </div>
+</section>
+
+<main>
+<section id="explore">
+  <div class="heading">
+    <div><h2 id="sectionTitle">Explore Wallpapers</h2><p data-i="subTitle">Fresh looks for your screen.</p></div>
+  </div>
+  <div class="tools">
+    <label class="search"><span>⌕</span><input id="search" type="search" data-placeholder="search" placeholder="Search wallpapers..."></label>
+    <select id="sort" aria-label="Sort wallpapers">
+      <option value="default" data-i="sortDefault">Default order</option>
+      <option value="name" data-i="sortName">Name A–Z</option>
+    </select>
+  </div>
+  <div class="categories" id="categories"></div>
+  <div class="status"><span id="count">Loading...</span><span data-i="free">FREE WALLPAPERS</span></div>
+  <div class="gallery" id="gallery"></div>
+  <div class="more"><button class="primary" id="moreBtn" data-i="more">Load more ↓</button></div>
+</section>
+
+<section class="upload" id="uploads">
+  <h2 data-i="uploadTitle">My Wallpapers ＋</h2>
+  <p data-i="uploadDesc">Add images from your device. They stay local to your browser and are not uploaded to this website.</p>
+  <div class="upload-row">
+    <label for="files" class="primary" data-i="chooseFiles">＋ Choose images</label>
+    <input id="files" type="file" accept="image/*" multiple>
+    <button class="secondary" id="myImages" data-i="showFiles">View my images</button>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="logo">WALL<span>ORA</span></div>
+  <p data-i="footerLine">Discover. Download. Customize.</p>
+  <p>CREATOR BY <strong>EVIL SECURITY</strong></p>
+  <p>© <span id="year"></span> WALLORA ULTRA</p>
+</footer>
+<div id="toast" class="toast hidden" role="status"></div>
+
+<script>
+"use strict";
+
+const image=(id)=>`https://images.unsplash.com/${id}?auto=format&fit=crop&w=900&q=85`;
+
+const wallpapers=[
+{id:"n1",title:"Mountain Lake",category:"Nature",url:image("photo-1470770841072-f978cf4d019e")},
+{id:"n2",title:"Golden Sunset",category:"Nature",url:image("photo-1470252649378-9c29740c9fa8")},
+{id:"n3",title:"Forest Escape",category:"Nature",url:image("photo-1441974231531-c6227db76b6e")},
+{id:"n4",title:"Blue Ocean",category:"Nature",url:image("photo-1518837695005-2083093ee35b")},
+{id:"n5",title:"Mountain Peaks",category:"Nature",url:image("photo-1464822759023-fed622ff2c3b")},
+{id:"n6",title:"Wild Landscape",category:"Nature",url:image("photo-1500534623283-312aade485b7")},
+{id:"n7",title:"Green Forest",category:"Nature",url:image("photo-1511497584788-876760111969")},
+{id:"n8",title:"Misty Woods",category:"Nature",url:image("photo-1448375240586-882707db888b")},
+{id:"s1",title:"Milky Way",category:"Space",url:image("photo-1519608487953-e999c86e7455")},
+{id:"s2",title:"Starry Mountains",category:"Space",url:image("photo-1519681393784-d120267933ba")},
+{id:"s3",title:"Cosmic Universe",category:"Space",url:image("photo-1534796636912-3b95b3ab5986")},
+{id:"s4",title:"Deep Space",category:"Space",url:image("photo-1462331940025-496dfbfc7564")},
+{id:"s5",title:"Earth from Space",category:"Space",url:image("photo-1446776811953-b23d57bd21aa")},
+{id:"c1",title:"Luxury Sports Car",category:"Cars",url:image("photo-1492144534655-ae79c964c9d7")},
+{id:"c2",title:"Modern Supercar",category:"Cars",url:image("photo-1503376780353-7e6692767b70")},
+{id:"c3",title:"Classic Car",category:"Cars",url:image("photo-1494976388531-d1058494cdd8")},
+{id:"c4",title:"Performance Car",category:"Cars",url:image("photo-1503736334956-4c8f8e92946d")},
+{id:"c5",title:"Road Machine",category:"Cars",url:image("photo-1511919884226-fd3cad34687c")},
+{id:"g1",title:"Gaming Setup",category:"Gaming",url:image("photo-1593305841991-05c297ba4575")},
+{id:"g2",title:"RGB Gaming",category:"Gaming",url:image("photo-1547394765-185e1e68f34e")},
+{id:"g3",title:"Gaming Station",category:"Gaming",url:image("photo-1593640408182-31c70c8268f5")},
+{id:"g4",title:"Tech Details",category:"Gaming",url:image("photo-1518770660439-4636190af475")},
+{id:"i1",title:"Modern Smartphone",category:"iPhone",url:image("photo-1511707171634-5f897ff02aa9")},
+{id:"i2",title:"Phone Design",category:"iPhone",url:image("photo-1592750475338-74b7b21085ab")},
+{id:"i3",title:"Mobile Technology",category:"iPhone",url:image("photo-1512499617640-c74ae3a79d37")},
+{id:"a1",title:"Modern Architecture",category:"Architecture",url:image("photo-1487958449943-2429e8be8625")},
+{id:"a2",title:"Urban Lines",category:"Architecture",url:image("photo-1511818966892-d7d671e672a2")},
+{id:"a3",title:"City Building",category:"Architecture",url:image("photo-1486406146926-c627a92ad1ab")},
+{id:"x1",title:"Abstract Colors",category:"Abstract",url:image("photo-1550684848-fac1c5b4e853")},
+{id:"x2",title:"Colorful Shapes",category:"Abstract",url:image("photo-1550859492-d5da9d8e45f3")},
+{id:"x3",title:"Creative Texture",category:"Abstract",url:image("photo-1557672172-298e090bd0f1")},
+{id:"x4",title:"Neon Art",category:"Abstract",url:image("photo-1500462918059-b1a0cb512f1d")},
+{id:"l1",title:"Romantic Couple",category:"Love",url:image("photo-1516589178581-6cd7833ae3b2")},
+{id:"l2",title:"Love and Flowers",category:"Love",url:image("photo-1490750967868-88aa4486c946")},
+{id:"l3",title:"Beautiful Roses",category:"Love",url:image("photo-1494972308805-463bc619d34e")},
+{id:"l4",title:"Romantic Flowers",category:"Love",url:image("photo-1523438885200-e635ba2c371e")},
+{id:"l5",title:"Pink Flowers",category:"Love",url:image("photo-1494621930892-9a1e3a7f1c5e")},
+{id:"m1",title:"Dark Mountain",category:"AMOLED",url:image("photo-1519681393784-d120267933ba")},
+{id:"m2",title:"Midnight Sky",category:"AMOLED",url:image("photo-1534796636912-3b95b3ab5986")},
+{id:"m3",title:"Dark Nature",category:"AMOLED",url:image("photo-1511497584788-876760111969")}
+];
+
+// Anime image searches are remote and may change or be blocked.
+// These are separate search results, not guaranteed official character art.
+const animeQueries=[
+"anime aesthetic wallpaper","anime sunset wallpaper","anime city night wallpaper",
+"anime landscape wallpaper","anime sky wallpaper","anime romance illustration wallpaper",
+"anime boy aesthetic wallpaper","anime girl aesthetic wallpaper"
+];
+animeQueries.forEach((query,i)=>{
+  wallpapers.push({
+    id:"anime-"+i,
+    title:"Anime Wallpaper "+(i+1),
+    category:"Anime",
+    url:"https://tse1.mm.bing.net/th?q="+encodeURIComponent(query)+"&w=900&h=1200&rs=1&p=0"
+  });
+});
+
+const categories=["All","iPhone","AMOLED","Anime","Love","Gaming","Cars","Nature","Space","Abstract","Architecture","My Uploads","Favorites"];
+const words={
+en:{
+navExplore:"Explore",navUploads:"My Uploads",eyebrow:"YOUR SCREEN. YOUR STYLE.",
+heroFirst:"Find Your",heroSecond:"Next Wallpaper.",heroDesc:"Discover wallpapers for every screen. Choose your style and download your favorites.",
+exploreBtn:"Explore wallpapers ↗",subTitle:"Fresh looks for your screen.",search:"Search wallpapers...",
+sortDefault:"Default order",sortName:"Name A–Z",free:"FREE WALLPAPERS",more:"Load more ↓",
+uploadTitle:"My Wallpapers ＋",uploadDesc:"Add images from your device. They stay local to your browser and are not uploaded to this website.",
+chooseFiles:"＋ Choose images",showFiles:"View my images",footerLine:"Discover. Download. Customize.",
+empty:"No wallpapers found",emptyDesc:"Try another category or search term.",
+view:"View image",download:"Download ↓",online:"Online wallpaper",local:"Your device",
+favorites:"Favorites",explore:"Explore Wallpapers",uploads:"My Uploads",
+added:"Added to favorites ♥",removed:"Removed from favorites",langButton:"🇲🇦 العربية",
+loading:"Loading wallpapers...",downloadStart:"Download started.",downloadFallback:"Opening image. Use your browser's Save image option.",
+uploadSuccess:" image(s) added.",noImages:"Please choose image files only."
+},
+ar:{
+navExplore:"استكشف",navUploads:"صوري",eyebrow:"شاشتك، أسلوبك.",
+heroFirst:"اكتشف",heroSecond:"خلفيتك القادمة.",heroDesc:"اكتشف خلفيات جميلة لكل شاشة. اختر أسلوبك وحمّل صورك المفضلة.",
+exploreBtn:"استكشف الخلفيات ↗",subTitle:"جدّد مظهر شاشتك.",search:"ابحث عن الخلفيات...",
+sortDefault:"الترتيب العادي",sortName:"الاسم أ–ي",free:"خلفيات مجانية",more:"عرض المزيد ↓",
+uploadTitle:"خلفياتي ＋",uploadDesc:"أضف الصور من جهازك. تبقى الصور محلية في متصفحك ولا تُرفع إلى هذا الموقع.",
+chooseFiles:"＋ اختر الصور",showFiles:"عرض صوري",footerLine:"اكتشف. حمّل. خصّص.",
+empty:"لم نعثر على خلفيات",emptyDesc:"جرّب تصنيفاً آخر أو كلمات بحث مختلفة.",
+view:"عرض الصورة",download:"تحميل ↓",online:"خلفية من الإنترنت",local:"من جهازك",
+favorites:"المفضلة",explore:"اكتشف الخلفيات",uploads:"صوري",
+added:"أُضيفت إلى المفضلة ♥",removed:"حُذفت من المفضلة",langButton:"🇬🇧 English",
+loading:"جارٍ تحميل الخلفيات...",downloadStart:"بدأ التحميل.",downloadFallback:"تم فتح الصورة. استعمل خيار حفظ الصورة في المتصفح.",
+uploadSuccess:" صورة تمت إضافتها.",noImages:"المرجو اختيار ملفات الصور فقط."
+},
+category:{
+en:{All:"All",iPhone:"iPhone",AMOLED:"AMOLED",Anime:"Anime",Love:"Love",Gaming:"Gaming",Cars:"Cars",Nature:"Nature",Space:"Space",Abstract:"Abstract",Architecture:"Architecture","My Uploads":"My Uploads",Favorites:"Favorites"},
+ar:{All:"الكل",iPhone:"آيفون",AMOLED:"أموليد",Anime:"أنمي",Love:"حب ورومانسية",Gaming:"ألعاب",Cars:"سيارات",Nature:"طبيعة",Space:"الفضاء",Abstract:"فن تجريدي",Architecture:"هندسة معمارية","My Uploads":"صوري",Favorites:"المفضلة"}
+}
+};
+
+let lang="en",active="All",favorites=readFavs(),uploads=[],limit=16,onlyFav=false,onlyUploads=false;
+const $=id=>document.getElementById(id);
+const gallery=$("gallery"),catBox=$("categories");
+function readFavs(){try{return JSON.parse(localStorage.getItem("wallora-favorites")||"[]")}catch{return[]}}
+function saveFavs(){try{localStorage.setItem("wallora-favorites",JSON.stringify(favorites))}catch{}}
+let toastTimer;
+function toast(message){$("toast").textContent=message;$("toast").classList.remove("hidden");clearTimeout(toastTimer);toastTimer=setTimeout(()=>$("toast").classList.add("hidden"),2600)}
+function t(key){return words[lang][key]||key}
+function allItems(){return [...wallpapers,...uploads]}
+function setTitle(){
+  $("sectionTitle").textContent=onlyFav?t("favorites"):onlyUploads?t("uploads"):active==="All"?t("explore"):(words.category[lang][active]||active);
+}
+function renderCategories(){
+  catBox.innerHTML="";
+  categories.forEach(c=>{
+    const b=document.createElement("button");
+    b.className="category"+(active===c?" active":"");
+    b.textContent=words.category[lang][c]||c;
+    b.onclick=()=>{
+      active=c;onlyFav=c==="Favorites";onlyUploads=c==="My Uploads";limit=16;
+      setTitle();renderCategories();render();
+    };
+    catBox.appendChild(b);
+  });
+}
+function filteredItems(){
+  let arr=allItems();
+  if(onlyFav)arr=arr.filter(x=>favorites.includes(x.id));
+  else if(onlyUploads)arr=arr.filter(x=>x.isUpload);
+  else if(active!=="All")arr=arr.filter(x=>x.category===active);
+  const q=$("search").value.trim().toLowerCase();
+  if(q)arr=arr.filter(x=>(x.title+" "+x.category).toLowerCase().includes(q));
+  if($("sort").value==="name")arr.sort((a,b)=>a.title.localeCompare(b.title));
+  return arr;
+}
+function favorite(id){
+  if(favorites.includes(id)){favorites=favorites.filter(x=>x!==id);toast(t("removed"))}
+  else{favorites.push(id);toast(t("added"))}
+  saveFavs();render();
+}
+function safeName(s){return s.replace(/[^\w\-]+/g,"-").replace(/^-+|-+$/g,"")||"wallpaper"}
+function download(item){
+  if(item.isUpload){
+    const a=document.createElement("a");a.href=item.url;a.download=safeName(item.title);
+    document.body.appendChild(a);a.click();a.remove();return;
+  }
+  fetch(item.url,{mode:"cors"}).then(r=>{if(!r.ok)throw Error();return r.blob()})
+  .then(blob=>{
+    const u=URL.createObjectURL(blob),a=document.createElement("a");
+    a.href=u;a.download=safeName(item.title)+".jpg";
+    document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(u),1500);
+    toast(t("downloadStart"));
+  }).catch(()=>{
+    toast(t("downloadFallback"));window.open(item.url,"_blank","noopener");
+  });
+}
+function card(item){
+  const article=document.createElement("article");article.className="card";
+  const picture=document.createElement("div");picture.className="picture";
+  const img=document.createElement("img");img.src=item.url;img.alt=item.title;img.loading="lazy";img.decoding="async";
+  img.onerror=()=>{
+    img.onerror=null;img.classList.add("failed");
+    img.src="data:image/svg+xml,"+encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="400" height="500"><rect width="100%" height="100%" fill="#e8e8ed"/><text x="50%" y="48%" text-anchor="middle" fill="#777" font-size="22">Image unavailable</text></svg>');
+  };
+  const tag=document.createElement("span");tag.className="tag";tag.textContent=words.category[lang][item.category]||item.category;
+  const heart=document.createElement("button");heart.className="heart"+(favorites.includes(item.id)?" saved":"");heart.textContent=favorites.includes(item.id)?"♥":"♡";
+  heart.setAttribute("aria-label","Favorite");heart.onclick=()=>favorite(item.id);
+  picture.append(img,tag,heart);
+  const info=document.createElement("div");info.className="info";
+  const name=document.createElement("div");name.className="name";name.textContent=item.title;
+  const meta=document.createElement("div");meta.className="meta";meta.textContent=item.isUpload?t("local"):t("online");
+  const actions=document.createElement("div");actions.className="actions";
+  const view=document.createElement("button");view.textContent=t("view");view.onclick=()=>window.open(item.url,"_blank","noopener");
+  const down=document.createElement("button");down.className="download";down.textContent=t("download");down.onclick=()=>download(item);
+  actions.append(view,down);info.append(name,meta,actions);article.append(picture,info);return article;
+}
+function render(){
+  const arr=filteredItems(),shown=arr.slice(0,limit);gallery.innerHTML="";
+  if(!shown.length){
+    const e=document.createElement("div");e.className="empty";
+    const h=document.createElement("h3");h.textContent=t("empty");
+    const p=document.createElement("p");p.textContent=t("emptyDesc");
+    e.append(h,p);gallery.appendChild(e);
+  }else shown.forEach(item=>gallery.appendChild(card(item)));
+  $("count").textContent=arr.length+" "+t("free").toLowerCase();
+  $("favCount").textContent=favorites.length;
+  $("moreBtn").classList.toggle("hidden",limit>=arr.length);
+  $("moreBtn").textContent=t("more");
+}
+function applyLanguage(){
+  document.documentElement.lang=lang;
+  document.documentElement.dir=lang==="ar"?"rtl":"ltr";
+  document.querySelectorAll("[data-i]").forEach(el=>el.textContent=t(el.dataset.i));
+  document.querySelectorAll("[data-placeholder]").forEach(el=>el.placeholder=t(el.dataset.placeholder));
+  $("langBtn").textContent=t("langButton");
+  $("sort").options[0].textContent=t("sortDefault");
+  $("sort").options[1].textContent=t("sortName");
+  setTitle();renderCategories();render();
+}
+$("langBtn").onclick=()=>{lang=lang==="en"?"ar":"en";applyLanguage()};
+$("search").addEventListener("input",()=>{limit=16;render()});
+$("sort").addEventListener("change",render);
+$("moreBtn").onclick=()=>{limit+=16;render()};
+$("favNav").onclick=()=>{
+  active="Favorites";onlyFav=true;onlyUploads=false;limit=16;
+  setTitle();renderCategories();render();$("explore").scrollIntoView({behavior:"smooth"});
+};
+$("myImages").onclick=()=>{
+  active="My Uploads";onlyFav=false;onlyUploads=true;limit=16;
+  setTitle();renderCategories();render();$("explore").scrollIntoView({behavior:"smooth"});
+};
+$("files").addEventListener("change",e=>{
+  const files=Array.from(e.target.files||[]),images=files.filter(f=>f.type.startsWith("image/"));
+  images.forEach((file,i)=>uploads.push({
+    id:"upload-"+Date.now()+"-"+i,title:file.name.replace(/\.[^.]+$/,""),
+    category:"My Uploads",url:URL.createObjectURL(file),isUpload:true
+  }));
+  if(images.length){
+    active="My Uploads";onlyFav=false;onlyUploads=true;limit=16;
+    setTitle();renderCategories();render();toast(images.length+t("uploadSuccess"));
+  }else if(files.length)toast(t("noImages"));
+  e.target.value="";
+});
+$("year").textContent=new Date().getFullYear();
+applyLanguage();
+</script>
+</body>
+</html>
